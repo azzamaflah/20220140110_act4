@@ -25,4 +25,11 @@ class _HomepageState extends State<Homepage> {
                   MaterialPageRoute(builder: (context) => const OrderPage()),
                 );
               },
+               child: Text('Order Now'),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
 }

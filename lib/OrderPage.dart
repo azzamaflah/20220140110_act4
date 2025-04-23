@@ -1,27 +1,32 @@
 import 'package:flutter/material.dart';
+import 'package:play_navigation/presentation/detail_order_page.dart';
 
-class Orderpage extends StatefulWidget {
-  const Orderpage({super.key});
+class OrderPage extends StatefulWidget {
+  const OrderPage({super.key});
 
   @override
-  State<Orderpage> createState() => _OrderpageState();
+  State<OrderPage> createState() => _OrderPageState();
 }
 
-class _OrderpageState extends State<Orderpage> {
+class _OrderPageState extends State<OrderPage> {
   final TextEditingController makananController = TextEditingController();
   final TextEditingController minumanController = TextEditingController();
   final TextEditingController jumlahMakananController = TextEditingController();
   final TextEditingController jumlahMinumanController = TextEditingController();
   int totalHarga = 0;
 
-  setState(() {
+  void calculateTotalPrice() {
+    int jumlahMakanan = int.tryParse(jumlahMakananController.text) ?? 0;
+    int jumlahMinuman = int.tryParse(jumlahMinumanController.text) ?? 0;
+
+    setState(() {
       totalHarga = (jumlahMakanan * 32000) + (jumlahMinuman * 5000);
     });
   }
 
   @override
   Widget build(BuildContext context) {
-   final _formKey = GlobalKey<FormState>();
+    final _formKey = GlobalKey<FormState>();
     return Scaffold(
       appBar: AppBar(title: Text('Order Page')),
       body: Form(
@@ -39,7 +44,7 @@ class _OrderpageState extends State<Orderpage> {
                 return null;
               },
             ),
-             TextFormField(
+            TextFormField(
               controller: minumanController,
               decoration: const InputDecoration(labelText: 'Drink Order'),
               validator: (value) {
@@ -69,5 +74,30 @@ class _OrderpageState extends State<Orderpage> {
                 return null;
               },
             ),
-     
+            ElevatedButton(
+              onPressed: () {
+                if (_formKey.currentState!.validate()) {
+                  calculateTotalPrice();
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder:
+                          (context) => DetailOrderPage(
+                            jumlahMakanan: jumlahMakananController.text,
+                            jumlahMinuman: jumlahMinumanController.text,
+                            makanan: makananController.text,
+                            minuman: minumanController.text,
+                            totalHarga: totalHarga,
+                          ),
+                    ),
+                  );
+                }
+              },
+              child: Text('Order Now'),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
 }

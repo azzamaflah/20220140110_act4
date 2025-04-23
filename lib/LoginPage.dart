@@ -1,13 +1,15 @@
+import 'package:act4/HomePage.dart';
+import 'package:act4/RegisterPage.dart';
 import 'package:flutter/material.dart';
 
-class Loginpage extends StatefulWidget {
-  const Loginpage({super.key});
+class LoginPage extends StatefulWidget {
+  const LoginPage({super.key});
 
   @override
-  State<Loginpage> createState() => _LoginpageState();
+  State<LoginPage> createState() => _LoginpageState();
 }
 
-class _LoginpageState extends State<Loginpage> {
+class _LoginpageState extends State<LoginPage> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
@@ -63,7 +65,7 @@ class _LoginpageState extends State<Loginpage> {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => RegisterPage()),
+                    MaterialPageRoute(builder: (context) => Registerpage()),
                   );
                 },
                 child: Text('Belum punya akun? Daftar'),

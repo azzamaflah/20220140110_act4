@@ -18,6 +18,22 @@ class _RegisterpageState extends State<Registerpage> {
   }
 
   Widget build(BuildContext context) {
-    return const Placeholder();
-  }
+    return Scaffold(
+      body: Form(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text('Register'),
+              TextFormField(
+                controller: emailController,
+                decoration: const InputDecoration(labelText: 'Email'),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Please enter your email';
+                  }
+                  return null;
+                },
+              ),
 }
